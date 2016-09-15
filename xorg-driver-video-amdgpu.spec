@@ -6,17 +6,17 @@
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
-Version:	1.1.0
+Version:	1.1.1
 Release:	1
 License:	MIT
 Group:		X11/Applications
-Source0:	http://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.bz2
-# Source0-md5:	89e62ee60b12f94e27ab76268bbbe778
-URL:		http://xorg.freedesktop.org/
+Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.bz2
+# Source0-md5:	8b2e2852299b330da709d0526b2b8134
+Patch0:		%{name}-sysconfigdir.patch
+URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
-%{?with_glamor:BuildRequires:	xorg-xserver-server-devel >= 1.16.0}
 BuildRequires:	libdrm-devel >= %{libdrm_ver}
 BuildRequires:	libtool
 BuildRequires:	pkgconfig >= 1:0.19
@@ -30,12 +30,13 @@ BuildRequires:	xorg-proto-xextproto-devel >= 7.0.99.1
 BuildRequires:	xorg-proto-xf86driproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
 BuildRequires:	xorg-xserver-server-devel >= 1.9
+%{?with_glamor:BuildRequires:	xorg-xserver-server-devel >= 1.16.0}
 %{?requires_xorg_xserver_videodrv}
-%{?with_glamor:Requires:	xorg-xserver-server >= 1.16.0}
 Requires:	libdrm >= %{libdrm_ver}
 Requires:	xorg-xserver-libdri >= 1.9
 Requires:	xorg-xserver-libglx >= 1.9
 Requires:	xorg-xserver-server >= 1.9
+%{?with_glamor:Requires:	xorg-xserver-server >= 1.16.0}
 Provides:	xorg-driver-video
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,6 +60,7 @@ Obsługuje karty graficzne z rodziny CI i nowszych.
 
 %prep
 %setup -q -n xf86-video-amdgpu-%{version}
+%patch0 -p1
 
 %build
 %{__libtoolize}

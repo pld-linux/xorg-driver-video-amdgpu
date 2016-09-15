@@ -1,0 +1,24 @@
+--- xf86-video-amdgpu-1.1.1/configure.ac.orig	2016-09-15 08:51:54.000000000 +0200
++++ xf86-video-amdgpu-1.1.1/configure.ac	2016-09-15 16:38:50.395978648 +0200
+@@ -90,9 +90,9 @@
+ AC_ARG_WITH(xorg-conf-dir,
+             AS_HELP_STRING([--with-xorg-conf-dir=DIR],
+                            [Default xorg.conf.d directory [[default=$prefix/share/X11/xorg.conf.d/]]]),
+-            [xorgconfdir="$withval"],
+-            [xorgconfdir="$prefix/share/X11/xorg.conf.d"])
+-AC_SUBST(configdir)
++            [sysconfigdir="$withval"],
++	    [if test "x$sysconfigdir" = "x" ; then sysconfigdir="$prefix/share/X11/xorg.conf.d" ; fi])
++AC_SUBST(sysconfigdir)
+ AM_CONDITIONAL(HAS_XORG_CONF_DIR, [test "x$sysconfigdir" != "x"])
+ 
+ AC_ARG_ENABLE([udev],
+--- xf86-video-amdgpu-1.1.1/conf/Makefile.am.orig	2015-04-26 03:41:53.000000000 +0200
++++ xf86-video-amdgpu-1.1.1/conf/Makefile.am	2016-09-15 16:51:51.325969732 +0200
+@@ -20,5 +20,5 @@
+ 
+ 
+ if HAS_XORG_CONF_DIR
+-dist_config_DATA = 10-amdgpu.conf
++dist_sysconfig_DATA = 10-amdgpu.conf
+ endif
