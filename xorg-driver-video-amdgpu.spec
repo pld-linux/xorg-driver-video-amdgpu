@@ -6,13 +6,12 @@
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.bz2
-# Source0-md5:	8b2e2852299b330da709d0526b2b8134
-Patch0:		%{name}-sysconfigdir.patch
+# Source0-md5:	02356ac7e840782edfd15ae81e508cec
 URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	autoconf >= 2.60
@@ -60,7 +59,6 @@ Obsługuje karty graficzne z rodziny CI i nowszych.
 
 %prep
 %setup -q -n xf86-video-amdgpu-%{version}
-%patch0 -p1
 
 %build
 %{__libtoolize}
