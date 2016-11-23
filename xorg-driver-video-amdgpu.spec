@@ -14,6 +14,7 @@ Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdg
 # Source0-md5:	f4e335b580336e03eeef10b08b68d757
 URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libGL-devel
+BuildRequires:	Mesa-libgbm-devel
 BuildRequires:	autoconf >= 2.60
 BuildRequires:	automake
 BuildRequires:	libdrm-devel >= %{libdrm_ver}
@@ -27,14 +28,15 @@ BuildRequires:	xorg-proto-renderproto-devel
 BuildRequires:	xorg-proto-videoproto-devel
 BuildRequires:	xorg-proto-xextproto-devel >= 7.0.99.1
 BuildRequires:	xorg-proto-xf86driproto-devel
+BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
-BuildRequires:	xorg-xserver-server-devel >= 1.9
+BuildRequires:	xorg-xserver-server-devel >= 1.10
 %{?with_glamor:BuildRequires:	xorg-xserver-server-devel >= 1.16.0}
 %{?requires_xorg_xserver_videodrv}
 Requires:	libdrm >= %{libdrm_ver}
-Requires:	xorg-xserver-libdri >= 1.9
-Requires:	xorg-xserver-libglx >= 1.9
-Requires:	xorg-xserver-server >= 1.9
+Requires:	xorg-xserver-libdri >= 1.10
+Requires:	xorg-xserver-libglx >= 1.10
+Requires:	xorg-xserver-server >= 1.10
 %{?with_glamor:Requires:	xorg-xserver-server >= 1.16.0}
 Provides:	xorg-driver-video
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
