@@ -48,7 +48,7 @@ the following features:
 - RandR support up to version 1.4,
 - 3D acceleration.
 
-This driver supports CI and newer families' video cards.
+This driver supports SI and newer families' video cards.
 
 %description
 amdgpu to sterownik obraz uXorg dla kart graficznych opartych na
@@ -57,7 +57,7 @@ układach AMD RADEON. Ma następujące możliwości:
 - obsługa RandR do wersji 1.4,
 - akceleracja 3D.
 
-Obsługuje karty graficzne z rodziny CI i nowszych.
+Obsługuje karty graficzne z rodziny SI i nowszych.
 
 %prep
 %setup -q -n xf86-video-amdgpu-%{version}
