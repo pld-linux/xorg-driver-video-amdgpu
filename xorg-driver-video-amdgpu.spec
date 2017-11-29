@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	glamor		# glamor, new GL-based acceleration
 #
-%define	libdrm_ver	2.4.72
+%define	libdrm_ver	2.4.78
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
@@ -30,13 +30,13 @@ BuildRequires:	xorg-proto-xextproto-devel >= 7.0.99.1
 BuildRequires:	xorg-proto-xf86driproto-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
-BuildRequires:	xorg-xserver-server-devel >= 1.10
+BuildRequires:	xorg-xserver-server-devel >= 1.13
 %{?with_glamor:BuildRequires:	xorg-xserver-server-devel >= 1.16.0}
 %{?requires_xorg_xserver_videodrv}
 Requires:	libdrm >= %{libdrm_ver}
-Requires:	xorg-xserver-libdri >= 1.10
-Requires:	xorg-xserver-libglx >= 1.10
-Requires:	xorg-xserver-server >= 1.10
+Requires:	xorg-xserver-libdri >= 1.13
+Requires:	xorg-xserver-libglx >= 1.13
+Requires:	xorg-xserver-server >= 1.13
 %{?with_glamor:Requires:	xorg-xserver-server >= 1.16.0}
 Provides:	xorg-driver-video
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
