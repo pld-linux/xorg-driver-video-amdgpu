@@ -2,16 +2,16 @@
 # Conditional build:
 %bcond_without	glamor		# glamor, new GL-based acceleration
 #
-%define	libdrm_ver	2.4.78
+%define	libdrm_ver	2.4.89
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
-Version:	18.0.1
-Release:	2
+Version:	18.1.0
+Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.bz2
-# Source0-md5:	d8368d204cb98d4387c8890562db1143
+# Source0-md5:	5d75f5993cda5e013cd851c5947ec450
 URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libGL-devel
 BuildRequires:	Mesa-libgbm-devel
