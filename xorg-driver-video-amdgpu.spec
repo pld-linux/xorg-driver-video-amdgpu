@@ -6,12 +6,12 @@
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
-Version:	22.0.0
+Version:	23.0.0
 Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.xz
-# Source0-md5:	6c907b44d32a0112e1a4788bab727f79
+# Source0-md5:	8a58421b3215769f0bfce855301f7964
 URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libgbm-devel
 BuildRequires:	OpenGL-devel
@@ -52,8 +52,8 @@ the following features:
 
 This driver supports SI and newer families' video cards.
 
-%description
-amdgpu to sterownik obraz uXorg dla kart graficznych opartych na
+%description -l pl.UTF-8
+amdgpu to sterownik obrazu Xorg dla kart graficznych opartych na
 układach AMD RADEON. Ma następujące możliwości:
 - obsługa 8, 15, 16, 24, 30-bitowej głębi kolorów,
 - obsługa RandR do wersji 1.4,
