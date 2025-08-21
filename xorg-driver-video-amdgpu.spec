@@ -2,25 +2,24 @@
 # Conditional build:
 %bcond_without	glamor		# glamor, new GL-based acceleration
 #
-%define	libdrm_ver	2.4.89
+%define	libdrm_ver	2.4.121
 Summary:	X.org video driver for AMD Radeon GPUs
 Summary(pl.UTF-8):	Sterowniki obrazu X.org do układów graficznych AMD Radeon
 Name:		xorg-driver-video-amdgpu
-Version:	23.0.0
+Version:	25.0.0
 Release:	1
 License:	MIT
 Group:		X11/Applications
 Source0:	https://xorg.freedesktop.org/releases/individual/driver/xf86-video-amdgpu-%{version}.tar.xz
-# Source0-md5:	8a58421b3215769f0bfce855301f7964
+# Source0-md5:	0aaf63c28cdd7a198d7273cc683c73ed
 URL:		https://xorg.freedesktop.org/
 BuildRequires:	Mesa-libgbm-devel
 BuildRequires:	OpenGL-devel
-BuildRequires:	autoconf >= 2.60
-BuildRequires:	automake
 BuildRequires:	libdrm-devel >= %{libdrm_ver}
-BuildRequires:	libtool
+BuildRequires:	meson >= 0.59.0
+BuildRequires:	ninja >= 1.5
 BuildRequires:	pkgconfig >= 1:0.19
-BuildRequires:	rpmbuild(macros) >= 1.389
+BuildRequires:	rpmbuild(macros) >= 2.042
 BuildRequires:	tar >= 1:1.22
 BuildRequires:	udev-devel
 BuildRequires:	xorg-proto-fontsproto-devel
@@ -31,15 +30,13 @@ BuildRequires:	xorg-proto-xextproto-devel >= 7.0.99.1
 BuildRequires:	xorg-proto-xf86driproto-devel
 BuildRequires:	xorg-proto-xproto-devel
 BuildRequires:	xorg-util-util-macros >= 1.8
-BuildRequires:	xorg-xserver-server-devel >= 1.13
-%{?with_glamor:BuildRequires:	xorg-xserver-server-devel >= 1.16.0}
+BuildRequires:	xorg-xserver-server-devel >= 1.18
 BuildRequires:	xz
 %{?requires_xorg_xserver_videodrv}
 Requires:	libdrm >= %{libdrm_ver}
-Requires:	xorg-xserver-libdri >= 1.13
-Requires:	xorg-xserver-libglx >= 1.13
-Requires:	xorg-xserver-server >= 1.13
-%{?with_glamor:Requires:	xorg-xserver-server >= 1.16.0}
+Requires:	xorg-xserver-libdri >= 1.18
+Requires:	xorg-xserver-libglx >= 1.18
+Requires:	xorg-xserver-server >= 1.18
 Provides:	xorg-driver-video
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -65,30 +62,23 @@ Obsługuje karty graficzne z rodziny SI i nowszych.
 %setup -q -n xf86-video-amdgpu-%{version}
 
 %build
-%{__libtoolize}
-%{__aclocal}
-%{__autoconf}
-%{__autoheader}
-%{__automake}
-%configure \
-	%{!?with_glamor:--disable-glamor}
+%meson \
+	-Dglamor=%{__enabled_disabled glamor} \
+	-Dudev=enabled
 
-%{__make}
+%meson_build
 
 %install
 rm -rf $RPM_BUILD_ROOT
 
-%{__make} install \
-	DESTDIR=$RPM_BUILD_ROOT
-
-%{__rm} $RPM_BUILD_ROOT%{_libdir}/xorg/modules/*/*.la
+%meson_install
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc COPYING ChangeLog README.md
+%doc COPYING README.md
 %attr(755,root,root) %{_libdir}/xorg/modules/drivers/amdgpu_drv.so
 %{_datadir}/X11/xorg.conf.d/10-amdgpu.conf
 %{_mandir}/man4/amdgpu.4*
